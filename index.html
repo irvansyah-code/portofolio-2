@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Irvan | Architectural Designer & Software Engineer (Computational Architect)</title>
+  <meta name="description" content="Portofolio profesional Irvan: Menggabungkan arsitektur spasial, desain parametrik BIM, dan software engineering modern (WebGL, Three.js, TypeScript, Python).">
+  <meta name="keywords" content="Architectural Designer, Software Engineer, Computational Design, Three.js, Rhino Grasshopper, BIM, Fullstack Developer, WebGL, Arsitek Indonesia">
+  <meta name="author" content="Irvan">
+
+  <!-- OpenGraph / Social Meta Tags -->
+  <meta property="og:title" content="Irvan | Architectural Designer & Software Engineer">
+  <meta property="og:description" content="Bridging the physical and algorithmic: Merancang ruang fisik, membangun arsitektur digital.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/arch_pavilion.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Three.js & OrbitControls for Real-time 3D Parametric Viewports -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-theme="default">
+
+  <!-- Architectural Drafting Grid Overlay -->
+  <div class="blueprint-background" id="blueprint-grid" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow-2" aria-hidden="true"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="logo" id="brand-logo" aria-label="Beranda Irvan">
+        <div class="logo-icon">I</div>
+        <div>
+          <span>IRVAN</span>
+          <span class="logo-badge">ARCH × DEV</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link active">Beranda</a></li>
+        <li><a href="#philosophy" class="nav-link">Filosofi</a></li>
+        <li><a href="#projects" class="nav-link">Proyek</a></li>
+        <li><a href="#playground" class="nav-link">Parametric Lab</a></li>
+        <li><a href="#skills" class="nav-link">Keahlian</a></li>
+        <li><a href="#process" class="nav-link">Proses</a></li>
+        <li><a href="#contact" class="nav-link">Kontak</a></li>
+      </ul>
+
+      <!-- Perspective Mode Switcher & Tools -->
+      <div class="nav-actions">
+        <div class="mode-pill" title="Ubah Perspektif Tampilan">
+          <button class="mode-btn active" data-mode="hybrid" id="mode-hybrid-btn" aria-label="Mode Hybrid">
+            <i data-lucide="layers" style="width:14px;height:14px"></i>
+            <span>Hybrid</span>
+          </button>
+          <button class="mode-btn" data-mode="arch" id="mode-arch-btn" aria-label="Mode Arsitektur">
+            <i data-lucide="compass" style="width:14px;height:14px"></i>
+            <span>Arsitek</span>
+          </button>
+          <button class="mode-btn" data-mode="code" id="mode-code-btn" aria-label="Mode Programmer">
+            <i data-lucide="code-2" style="width:14px;height:14px"></i>
+            <span>Dev</span>
+          </button>
+        </div>
+
+        <button class="btn btn-secondary font-mono" id="open-terminal-btn" style="padding: 0.45rem 0.85rem; font-size: 0.8rem;" title="Buka Interactive Terminal">
+          <i data-lucide="terminal" style="width:14px;height:14px"></i>
+          <span>>_ CLI</span>
+        </button>
+
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Buka Menu Navigasi">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- =====================================================================
+         HERO SECTION: DUAL HEADLINE & LIVE 3D PARAMETRIC PAVILION
+         ===================================================================== -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <!-- Left: Headline & Bio -->
+        <div class="hero-content">
+          <div class="live-indicator">
+            <span class="pulse-dot"></span>
+            <span>OPEN FOR ARCHITECTURAL COMMISSIONS & FULL-STACK TECH</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="gradient-text">Merancang Ruang Fisik.</span><br>
+            <span>Membangun Arsitektur</span> <span class="gradient-tech">Digital.</span>
+          </h1>
+
+          <p class="hero-desc">
+            Saya mengawinkan keindahan <strong>desain arsitektur tropis &amp; parametrik</strong> dengan presisi tinggi <strong>rekayasa perangkat lunak modern</strong>. Menghasilkan struktur spasial nyata sekaligus aplikasi Web 3D, digital twin, dan algoritma komputasi generatif.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary" id="hero-explore-projects">
+              <i data-lucide="folder-kanban" style="width:18px;height:18px"></i>
+              <span>Eksplorasi Proyek</span>
+            </a>
+            <a href="#playground" class="btn btn-secondary" id="hero-try-sandbox">
+              <i data-lucide="box" style="width:18px;height:18px"></i>
+              <span>Coba Parametric Lab</span>
+            </a>
+            <a href="#contact" class="btn btn-outline-glow" id="hero-contact-btn">
+              <i data-lucide="send" style="width:18px;height:18px"></i>
+              <span>Mulai Diskusi</span>
+            </a>
+          </div>
+
+          <!-- Quick Stats Bar -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number amber" id="stat-experience">8+ Thn</span>
+              <span class="stat-label">Desain &amp; Komputasi</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number cyan" id="stat-projects">35+</span>
+              <span class="stat-label">Proyek Fisik &amp; WebGL</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" style="color:var(--accent-emerald);">100%</span>
+              <span class="stat-label">Algorithmic Precision</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number cyan">BIM × Web</span>
+              <span class="stat-label">Modern Spatial Tech</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Real-time 3D Viewport Card -->
+        <div class="hero-canvas-card" id="hero-card">
+          <div class="canvas-header">
+            <div class="canvas-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <div class="font-mono">PARAMETRIC_STRUCTURE_STUDY.3D</div>
+            <div class="canvas-mode-tag" id="canvas-status">RENDER: LIVE GL</div>
+          </div>
+
+          <div class="canvas-viewport-wrapper">
+            <canvas id="hero-3d-canvas" aria-label="3D Parametric Architectural Pavilion Model"></canvas>
+            
+            <!-- Canvas HUD Details -->
+            <div class="canvas-hud">
+              <div class="hud-specs">
+                <span>VERTICES: <strong id="hud-vertices">2,480</strong></span>
+                <span>TWIST: <strong id="hud-twist">45°</strong></span>
+                <span>FPS: <strong id="hud-fps">60</strong></span>
+              </div>
+              <div class="hud-hint">
+                <i data-lucide="move" style="width:12px;height:12px"></i>
+                <span>Putar mouse untuk orbit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PHILOSOPHY SECTION: FORM & ALGORITHM
+         ===================================================================== -->
+    <section class="philosophy-section" id="philosophy">
+      <div class="container">
+        <div class="section-tag">
+          <i data-lucide="cpu" style="width:14px;height:14px"></i>
+          <span>Dua Sudut Pandang, Satu Visi</span>
+        </div>
+        <h2 class="section-title">
+          Pertemuan Antara <span class="gradient-arch">Batu Bata</span> &amp; <span class="gradient-tech">Baris Kode</span>
+        </h2>
+        <p class="section-subtitle">
+          Bagi saya, arsitektur bukan sekadar menggambar fasad, dan pemrograman bukan sekadar menulis sintaks. Keduanya adalah seni merancang sistem yang fungsional, adaptif, dan berorientasi pada manusia.
+        </p>
+
+        <div class="philosophy-grid">
+          <!-- Architecture Card -->
+          <div class="matrix-card arch" id="card-arch-mindset">
+            <div class="matrix-icon-box">
+              <i data-lucide="drafting-compass"></i>
+            </div>
+            <h3 class="matrix-title">Sebagai Arsitek Spasial</h3>
+            <p class="matrix-lead">
+              Memahami gravitasi, orientasi matahari, materialitas lokal, dan psikologi ruang. Merancang bangunan yang bernapas selaras dengan iklim tropis Indonesia.
+            </p>
+            <ul class="matrix-points">
+              <li>
+                <i data-lucide="check-circle-2" style="width:18px;height:18px"></i>
+                <span><strong>Bioclimatic &amp; Passive Cooling:</strong> Mengurangi konsumsi energi melalui simulasi radiasi matahari dan aliran udara alami.</span>
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" style="width:18px;height:18px"></i>
+                <span><strong>Tektonika &amp; Materialitas:</strong> Kehangatan kayu jati reklamasi, kejujuran beton ekspos, dan efisiensi baja struktural.</span>
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" style="width:18px;height:18px"></i>
+                <span><strong>BIM &amp; Koordinasi Konstruksi:</strong> Detail arsitektural presisi tinggi menggunakan Revit &amp; Rhino untuk meminimalisir kesalahan di lapangan.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Software Engineering Card -->
+          <div class="matrix-card code" id="card-code-mindset">
+            <div class="matrix-icon-box">
+              <i data-lucide="code"></i>
+            </div>
+            <h3 class="matrix-title">Sebagai Software Engineer</h3>
+            <p class="matrix-lead">
+              Menerapkan prinsip clean architecture, efisiensi algoritma, grafika 3D interaktif, dan komputasi awan untuk mendigitalisasi dunia fisik ke layar web.
+            </p>
+            <ul class="matrix-points">
+              <li>
+                <i data-lucide="check-circle-2" style="width:18px;height:18px"></i>
+                <span><strong>WebGL &amp; Real-time 3D:</strong> Mengembangkan visualizer 3D browser interaktif menggunakan Three.js dan GLSL custom shaders.</span>
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" style="width:18px;height:18px"></i>
+                <span><strong>Generative &amp; Parametric Scripts:</strong> Scripting Python &amp; Grasshopper untuk optimasi otomatisasi tata letak ruang (Space Planning).</span>
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" style="width:18px;height:18px"></i>
+                <span><strong>Full-stack Web Applications:</strong> Membangun platform SaaS arsitektural dengan TypeScript, React, Next.js, Node.js, dan WebSockets.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- The Synthesis Banner -->
+        <div class="synthesis-banner">
+          <div class="synthesis-content">
+            <h4><i data-lucide="zap" style="width:18px;height:18px;display:inline-block;vertical-align:middle;color:var(--accent-amber);margin-right:6px"></i> The Superpower: Computational Architecture</h4>
+            <p>
+              Ketika pemahaman spasial bersatu dengan kemampuan coding, kita dapat menciptakan fasad responsif, alat kalkulasi BIM otomatis, hingga Digital Twin real-time dengan sensor IoT gedung pintar yang tidak dapat dilakukan oleh arsitek konvensional.
+            </p>
+          </div>
+          <a href="#playground" class="btn btn-secondary" style="white-space:nowrap;">
+            <span>Buka Sandbox</span>
+            <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         FEATURED PROJECTS SHOWCASE (DYNAMIC FILTER & MODAL DEEP-DIVE)
+         ===================================================================== -->
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="projects-header-row">
+          <div>
+            <div class="section-tag">
+              <i data-lucide="briefcase" style="width:14px;height:14px"></i>
+              <span>Portofolio Terpilih</span>
+            </div>
+            <h2 class="section-title">Karya Spasial &amp; Digital</h2>
+            <p class="section-subtitle">
+              Pilihan proyek arsitektur fisik, platform perangkat lunak 3D, dan sistem parametrik yang telah saya rancang dan bangun.
+            </p>
+          </div>
+
+          <!-- Dynamic Filter Tabs -->
+          <div class="filter-tabs" role="tablist" id="project-filters">
+            <button class="filter-btn active" data-filter="all" id="filter-all">Semua (6)</button>
+            <button class="filter-btn" data-filter="arch" id="filter-arch">Arsitektur Fisik</button>
+            <button class="filter-btn" data-filter="software" id="filter-software">Software &amp; WebGL</button>
+            <button class="filter-btn" data-filter="parametric" id="filter-parametric">Generative &amp; BIM</button>
+          </div>
+        </div>
+
+        <!-- Projects Grid Container -->
+        <div class="projects-grid" id="projects-grid-container">
+          <!-- Project 1: Nusantara Parametric Pavilion -->
+          <article class="project-card" data-category="arch parametric" id="proj-card-1">
+            <div class="project-media">
+              <img src="assets/images/arch_pavilion.jpg" alt="Paviliun Parametrik Nusantara" loading="lazy">
+              <span class="project-badge-float arch">ARSI-FISIK &amp; PARAMETRIK</span>
+              <div class="project-overlay-action">
+                <button class="btn btn-primary view-project-btn" data-project-id="1">
+                  <i data-lucide="eye" style="width:16px;height:16px"></i>
+                  <span>Detail Studi Kasus</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-client-year">JAKARTA • 2025</span>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">TIMBER STRUCTURAL</span>
+              </div>
+              <h3 class="project-title">Paviliun Parametrik Nusantara</h3>
+              <p class="project-desc">
+                Struktur kanopi kayu laminasi melengkung ganda yang dioptimalkan dengan algoritma genetika (Grasshopper Kangaroo) untuk kekuatan beban gempa dan kenyamanan iklim mikro.
+              </p>
+              <div class="project-tags">
+                <span class="tech-tag">Rhino 3D</span>
+                <span class="tech-tag">Grasshopper</span>
+                <span class="tech-tag">Kangaroo Physics</span>
+                <span class="tech-tag">Glulam Teak</span>
+              </div>
+              <div class="project-footer">
+                <button class="view-case-study view-project-btn" data-project-id="1">
+                  <span>Lihat Spesifikasi &amp; Detail</span>
+                  <i data-lucide="arrow-right" style="width:14px;height:14px"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Skyline Nexus Bioclimatic Tower -->
+          <article class="project-card" data-category="arch parametric" id="proj-card-2">
+            <div class="project-media">
+              <img src="assets/images/smart_tower.jpg" alt="Skyline Nexus Smart Tower" loading="lazy">
+              <span class="project-badge-float">BIM &amp; BIOCLIMATIC TOWER</span>
+              <div class="project-overlay-action">
+                <button class="btn btn-primary view-project-btn" data-project-id="2">
+                  <i data-lucide="eye" style="width:16px;height:16px"></i>
+                  <span>Detail Studi Kasus</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-client-year">SCBD JAKARTA • 2024</span>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">42 LANTAI</span>
+              </div>
+              <h3 class="project-title">Skyline Nexus: Bioclimatic Tower</h3>
+              <p class="project-desc">
+                Menara perkantoran modern dengan kisi fasad Voronoi adaptif yang diprogram menggunakan Python Ladybug untuk memotong beban radiasi panas surya hingga 38%.
+              </p>
+              <div class="project-tags">
+                <span class="tech-tag">Autodesk Revit BIM</span>
+                <span class="tech-tag">Ladybug Solar Simulation</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Voronoi Lattice</span>
+              </div>
+              <div class="project-footer">
+                <button class="view-case-study view-project-btn" data-project-id="2">
+                  <span>Lihat Spesifikasi &amp; Detail</span>
+                  <i data-lucide="arrow-right" style="width:14px;height:14px"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: ArcGene 3D Generative Studio -->
+          <article class="project-card" data-category="software parametric" id="proj-card-3">
+            <div class="project-media">
+              <img src="assets/images/generative_cad_ui.jpg" alt="ArcGene 3D Software" loading="lazy">
+              <span class="project-badge-float">WEB CAD &amp; SOFTWARE</span>
+              <div class="project-overlay-action">
+                <button class="btn btn-primary view-project-btn" data-project-id="3">
+                  <i data-lucide="eye" style="width:16px;height:16px"></i>
+                  <span>Detail Studi Kasus</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-client-year">SAAS PLATFORM • 2025</span>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">WEBGL 2.0</span>
+              </div>
+              <h3 class="project-title">ArcGene: Generative CAD Web Studio</h3>
+              <p class="project-desc">
+                Aplikasi web berbasis browser untuk perancangan volume massa arsitektur parametrik secara real-time dengan kalkulasi instan Gross Floor Area (GFA) dan ekspor glTF/IFC.
+              </p>
+              <div class="project-tags">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Three.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">WebAssembly</span>
+                <span class="tech-tag">Tailwind</span>
+              </div>
+              <div class="project-footer">
+                <button class="view-case-study view-project-btn" data-project-id="3">
+                  <span>Lihat Spesifikasi &amp; Detail</span>
+                  <i data-lucide="arrow-right" style="width:14px;height:14px"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Villa Kinanti Tropical Brutalism -->
+          <article class="project-card" data-category="arch" id="proj-card-4">
+            <div class="project-media">
+              <img src="assets/images/tropical_villa.jpg" alt="Villa Kinanti Tropical Brutalism" loading="lazy">
+              <span class="project-badge-float arch">RESIDENTIAL ARSITEKTUR</span>
+              <div class="project-overlay-action">
+                <button class="btn btn-primary view-project-btn" data-project-id="4">
+                  <i data-lucide="eye" style="width:16px;height:16px"></i>
+                  <span>Detail Studi Kasus</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-client-year">ULUWATU BALI • 2024</span>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">LUAS 680 M²</span>
+              </div>
+              <h3 class="project-title">Villa Kinanti: Tropical Brutalism</h3>
+              <p class="project-desc">
+                Hunian peristirahatan tebing tebing laut dengan beton ekspos bertekstur sirap jati, kantilever atap dramatis, serta sistem otomasi mikrokontroler mandiri hemat daya.
+              </p>
+              <div class="project-tags">
+                <span class="tech-tag">Architectural Concrete</span>
+                <span class="tech-tag">Cantilever Structure</span>
+                <span class="tech-tag">Microclimate Design</span>
+                <span class="tech-tag">ESP32 IoT</span>
+              </div>
+              <div class="project-footer">
+                <button class="view-case-study view-project-btn" data-project-id="4">
+                  <span>Lihat Spesifikasi &amp; Detail</span>
+                  <i data-lucide="arrow-right" style="width:14px;height:14px"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: SpatialTwin Digital Twin Dashboard -->
+          <article class="project-card" data-category="software" id="proj-card-5">
+            <div class="project-media" style="background: radial-gradient(circle at center, #0f2438, #050b14); display:flex; align-items:center; justify-content:center;">
+              <!-- High-tech 3D Vector Graphic Representation -->
+              <svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="110,20 190,65 110,110 30,65" stroke="#00f0ff" stroke-width="2" fill="rgba(0,240,255,0.06)"/>
+                <polygon points="110,45 190,90 110,135 30,90" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3" fill="rgba(56,189,248,0.04)"/>
+                <line x1="110" y1="20" x2="110" y2="45" stroke="#00f0ff" stroke-width="1.5"/>
+                <line x1="190" y1="65" x2="190" y2="90" stroke="#00f0ff" stroke-width="1.5"/>
+                <line x1="30" y1="65" x2="30" y2="90" stroke="#00f0ff" stroke-width="1.5"/>
+                <circle cx="110" cy="65" r="5" fill="#f59e0b"/>
+                <circle cx="140" cy="50" r="3.5" fill="#10b981"/>
+                <circle cx="80" cy="80" r="3.5" fill="#ef4444"/>
+                <text x="110" y="77" fill="#f59e0b" font-family="monospace" font-size="7" text-anchor="middle">HVAC 22.4°C</text>
+              </svg>
+              <span class="project-badge-float">DIGITAL TWIN &amp; IOT</span>
+              <div class="project-overlay-action">
+                <button class="btn btn-primary view-project-btn" data-project-id="5">
+                  <i data-lucide="eye" style="width:16px;height:16px"></i>
+                  <span>Detail Studi Kasus</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-client-year">ENTERPRISE BIM • 2025</span>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">WEBSOCKETS</span>
+              </div>
+              <h3 class="project-title">SpatialTwin: Smart Building Dashboard</h3>
+              <p class="project-desc">
+                Platform digital twin 3D gedung pintar interaktif berbasis web untuk memonitor konsumsi energi HVAC, sensor kualitas udara (IAQ), dan heatmap pergerakan manusia secara real-time.
+              </p>
+              <div class="project-tags">
+                <span class="tech-tag">Three.js</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">WebSockets</span>
+                <span class="tech-tag">IFC.js</span>
+                <span class="tech-tag">InfluxDB</span>
+              </div>
+              <div class="project-footer">
+                <button class="view-case-study view-project-btn" data-project-id="5">
+                  <span>Lihat Spesifikasi &amp; Detail</span>
+                  <i data-lucide="arrow-right" style="width:14px;height:14px"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: RhinoToWeb glTF Pipeline -->
+          <article class="project-card" data-category="software parametric" id="proj-card-6">
+            <div class="project-media" style="background: radial-gradient(circle at center, #1e1329, #08050e); display:flex; align-items:center; justify-content:center;">
+              <!-- CLI / Code Vector Representation -->
+              <svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="25" width="170" height="100" rx="8" fill="#0d111d" stroke="#8b5cf6" stroke-width="1.5"/>
+                <line x1="25" y1="48" x2="195" y2="48" stroke="#8b5cf6" stroke-width="0.75"/>
+                <circle cx="37" cy="37" r="3" fill="#ef4444"/>
+                <circle cx="47" cy="37" r="3" fill="#f59e0b"/>
+                <circle cx="57" cy="37" r="3" fill="#10b981"/>
+                <text x="36" y="70" fill="#a78bfa" font-family="monospace" font-size="8">$ rhino2gltf model.3dm --opt</text>
+                <text x="36" y="86" fill="#34d399" font-family="monospace" font-size="8">✓ 4,210 breps converted</text>
+                <text x="36" y="102" fill="#38bdf8" font-family="monospace" font-size="8">✓ Mesh compression: -78%</text>
+              </svg>
+              <span class="project-badge-float" style="color:var(--accent-purple);border-color:rgba(139,92,246,0.3);">CLI &amp; OPEN SOURCE</span>
+              <div class="project-overlay-action">
+                <button class="btn btn-primary view-project-btn" data-project-id="6">
+                  <i data-lucide="eye" style="width:16px;height:16px"></i>
+                  <span>Detail Studi Kasus</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-client-year">DEVELOPER TOOL • 2024</span>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">CLI &amp; WASM</span>
+              </div>
+              <h3 class="project-title">RhinoToWeb: Geometry Pipeline</h3>
+              <p class="project-desc">
+                Tool open-source berkinerja tinggi untuk mengonversi geometri kompleks Grasshopper dan Rhino 3DM ke format web 3D (glTF 2.0 / Draco) dengan kompresi ukuran file hingga 78%.
+              </p>
+              <div class="project-tags">
+                <span class="tech-tag">Rust</span>
+                <span class="tech-tag">Rhino3dm</span>
+                <span class="tech-tag">glTF 2.0</span>
+                <span class="tech-tag">Draco Mesh</span>
+                <span class="tech-tag">CLI</span>
+              </div>
+              <div class="project-footer">
+                <button class="view-case-study view-project-btn" data-project-id="6">
+                  <span>Lihat Spesifikasi &amp; Detail</span>
+                  <i data-lucide="arrow-right" style="width:14px;height:14px"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         INTERACTIVE PARAMETRIC LAB (REAL-TIME 3D SANDBOX & CODE GENERATOR)
+         ===================================================================== -->
+    <section class="playground-section" id="playground">
+      <div class="container">
+        <div class="section-tag">
+          <i data-lucide="sparkles" style="width:14px;height:14px"></i>
+          <span>Interactive Computational Sandbox</span>
+        </div>
+        <h2 class="section-title">
+          Parametric Studio <span class="gradient-text">Playground</span>
+        </h2>
+        <p class="section-subtitle">
+          Rasakan langsung bagaimana variabel matematika dan baris kode membentuk geometri arsitektur secara real-time. Ubah parameter di bawah dan perhatikan kode generator yang disinkronkan.
+        </p>
+
+        <div class="playground-wrapper">
+          <!-- 3D WebGL Canvas Area -->
+          <div class="playground-canvas-area">
+            <div class="canvas-toolbar">
+              <div class="toolbar-group">
+                <button class="tool-btn active" id="btn-view-wire" title="Tampilan Wireframe">
+                  <i data-lucide="grid" style="width:14px;height:14px"></i>
+                  <span>Wireframe</span>
+                </button>
+                <button class="tool-btn" id="btn-view-solid" title="Tampilan Solid Shading">
+                  <i data-lucide="box" style="width:14px;height:14px"></i>
+                  <span>Solid</span>
+                </button>
+                <button class="tool-btn" id="btn-auto-rotate" title="Toggle Auto Rotate">
+                  <i data-lucide="rotate-cw" style="width:14px;height:14px"></i>
+                  <span>Auto-Spin</span>
+                </button>
+              </div>
+
+              <div class="toolbar-group">
+                <button class="tool-btn" id="btn-reset-cam" title="Reset Kamera 3D">
+                  <i data-lucide="camera" style="width:14px;height:14px"></i>
+                  <span>Reset Cam</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Canvas Element -->
+            <canvas id="playground-canvas" aria-label="Interactive 3D Parametric Playground Canvas"></canvas>
+          </div>
+
+          <!-- Parameter Controllers & Live Code Generator -->
+          <div class="playground-controls">
+            <div class="controls-header">
+              <h3 class="controls-title">
+                <i data-lucide="sliders" style="width:18px;height:18px;color:var(--accent-cyan)"></i>
+                <span>Parameter Geometri Fasad</span>
+              </h3>
+            </div>
+
+            <!-- Controller 1: Twist Angle -->
+            <div class="control-group">
+              <div class="control-label-row">
+                <span>Sudut Puntir (Twist Angle):</span>
+                <span class="control-val font-mono" id="val-twist">90°</span>
+              </div>
+              <input type="range" class="param-slider" id="slider-twist" min="0" max="360" value="90">
+            </div>
+
+            <!-- Controller 2: Floor Levels -->
+            <div class="control-group">
+              <div class="control-label-row">
+                <span>Tinggi Lantai / Levels:</span>
+                <span class="control-val font-mono" id="val-floors">24 Fl</span>
+              </div>
+              <input type="range" class="param-slider" id="slider-floors" min="6" max="48" value="24">
+            </div>
+
+            <!-- Controller 3: Taper / Scale Ratio -->
+            <div class="control-group">
+              <div class="control-label-row">
+                <span>Rasio Kelengkungan (Taper):</span>
+                <span class="control-val font-mono" id="val-taper">0.65</span>
+              </div>
+              <input type="range" class="param-slider" id="slider-taper" min="20" max="150" value="65">
+            </div>
+
+            <!-- Controller 4: Rib Density -->
+            <div class="control-group">
+              <div class="control-label-row">
+                <span>Kepadatan Louver Parametrik:</span>
+                <span class="control-val font-mono" id="val-ribs">16 Ribs</span>
+              </div>
+              <input type="range" class="param-slider" id="slider-ribs" min="6" max="36" value="16">
+            </div>
+
+            <!-- Material Style -->
+            <div class="control-group">
+              <label class="control-label-row">
+                <span>Pilihan Material Fasad:</span>
+              </label>
+              <div class="style-selector">
+                <button class="style-chip active" data-mat="cyan">Cyber Blueprint</button>
+                <button class="style-chip" data-mat="amber">Timber Gold</button>
+                <button class="style-chip" data-mat="emerald">Bioclimatic Green</button>
+                <button class="style-chip" data-mat="white">Minimalist Bauhaus</button>
+              </div>
+            </div>
+
+            <!-- Live Code Block Generator -->
+            <div class="live-code-block">
+              <div class="code-header-row">
+                <span class="code-lang-tab">RHINO PYTHON / THREE.JS</span>
+                <button class="copy-code-btn" id="btn-copy-code" title="Salin Kode Algoritma">
+                  <i data-lucide="copy" style="width:12px;height:12px"></i>
+                  <span id="copy-btn-text">Salin Kode</span>
+                </button>
+              </div>
+              <pre class="code-snippet-box" id="live-code-snippet"><code># Computational Tower Generator
+import rhinoscriptsyntax as rs
+import math
+
+floors = 24
+twist_angle = 90.0 # deg
+taper_ratio = 0.65
+
+def generate_tower():
+    pts = []
+    for i in range(floors):
+        rot = (twist_angle / floors) * i
+        scale = 1.0 - (1.0 - taper_ratio) * (i / floors)
+        ...</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         DUAL SKILLS & TECH STACK RADAR
+         ===================================================================== -->
+    <section class="skills-section" id="skills">
+      <div class="container">
+        <div class="section-tag arch">
+          <i data-lucide="wrench" style="width:14px;height:14px"></i>
+          <span>Kemampuan Lintas Disiplin</span>
+        </div>
+        <h2 class="section-title">
+          Tech Stack &amp; <span class="gradient-arch">Architectural</span> Suite
+        </h2>
+        <p class="section-subtitle">
+          Alat dan bahasa yang saya gunakan sehari-hari untuk mendesain ruang nyata berstandar internasional dan memprogram sistem digital modern.
+        </p>
+
+        <div class="skills-grid">
+          <!-- Architecture & Spatial Stack -->
+          <div class="skill-category-card" id="skills-arch-card">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon arch">
+                <i data-lucide="building"></i>
+              </div>
+              <div>
+                <h3>Arsitektur, BIM &amp; Simulasi</h3>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">SPATIAL COMPUTATION &amp; TECTONICS</span>
+              </div>
+            </div>
+
+            <div class="skill-items-list">
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>Rhino 3D &amp; Grasshopper (Parametric Design)</span>
+                  <span class="level">95% • ADVANCED</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill arch" style="width:95%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>Autodesk Revit (BIM Modeling &amp; Coordination)</span>
+                  <span class="level">90% • EXPERT</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill arch" style="width:90%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>Ladybug &amp; ClimateStudio (Solar &amp; Thermal Simulation)</span>
+                  <span class="level">85% • ADVANCED</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill arch" style="width:85%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>AutoCAD (Technical Detailing &amp; Shop Drawings)</span>
+                  <span class="level">95% • EXPERT</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill arch" style="width:95%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>Lumion, V-Ray, Enscape (Cinematic Rendering)</span>
+                  <span class="level">88% • ADVANCED</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill arch" style="width:88%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Software Engineering Stack -->
+          <div class="skill-category-card" id="skills-code-card">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon code">
+                <i data-lucide="code-2"></i>
+              </div>
+              <div>
+                <h3>Software Engineering &amp; WebGL</h3>
+                <span class="font-mono text-dim" style="font-size:0.75rem;">FULLSTACK &amp; COMPUTER GRAPHICS</span>
+              </div>
+            </div>
+
+            <div class="skill-items-list">
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>Three.js / WebGL / GLSL Shaders</span>
+                  <span class="level">92% • ADVANCED</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill code" style="width:92%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>JavaScript / TypeScript (ES6+, Modern Architecture)</span>
+                  <span class="level">94% • ADVANCED</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill code" style="width:94%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>Python (Rhino.Inside, NumPy, Algorithmic Geometry)</span>
+                  <span class="level">88% • EXPERT</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill code" style="width:88%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>React.js / Next.js / Tailwind CSS / Vanilla CSS</span>
+                  <span class="level">90% • ADVANCED</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill code" style="width:90%"></div></div>
+              </div>
+
+              <div class="skill-bar-row">
+                <div class="skill-info">
+                  <span>C# (.NET for Revit API &amp; Grasshopper Plugins)</span>
+                  <span class="level">82% • PROFICIENT</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill code" style="width:82%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         WORK PROCESS / PIPELINE
+         ===================================================================== -->
+    <section class="process-section" id="process">
+      <div class="container">
+        <div class="section-tag">
+          <i data-lucide="git-branch" style="width:14px;height:14px"></i>
+          <span>Metodologi Kerja</span>
+        </div>
+        <h2 class="section-title">Dari Logika Konsep ke Struktur Nyata</h2>
+        <p class="section-subtitle">
+          Proses kerja terintegrasi yang menjembatani simulasi komputasi dengan ketepatan eksekusi konstruksi fisik.
+        </p>
+
+        <div class="process-grid">
+          <!-- Step 1 -->
+          <div class="process-card">
+            <div class="process-step-num font-mono">01</div>
+            <h3 class="process-title">Algorithmic Form Finding</h3>
+            <p class="process-text">
+              Mengeksplorasi ribuan variasi geometri melalui kode parametrik untuk mendapatkan bentuk spasial yang paling optimal terhadap fungsi dan iklim.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-card">
+            <div class="process-step-num font-mono">02</div>
+            <h3 class="process-title">BIM Simulation &amp; Testing</h3>
+            <p class="process-text">
+              Validasi struktural beban gempa, radiasi matahari (solar heat gain), dan kalkulasi kuantitas material secara otomatis via model data BIM.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-card">
+            <div class="process-step-num font-mono">03</div>
+            <h3 class="process-title">Digital Twin &amp; Web 3D</h3>
+            <p class="process-text">
+              Membangun visualisasi interaktif di web sehingga klien dan tim kontraktor dapat menginspeksi ruang 3D secara transparan dari perangkat apa pun.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-card">
+            <div class="process-step-num font-mono">04</div>
+            <h3 class="process-title">Precision Fabrication</h3>
+            <p class="process-text">
+              Menghasilkan gambar kerja presisi (Shop Drawings) dan file CNC/laser cut langsung dari model komputasi tanpa distorsi ukuran.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         CONTACT & PROJECT ESTIMATOR SECTION
+         ===================================================================== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-tag">
+          <i data-lucide="mail" style="width:14px;height:14px"></i>
+          <span>Mulai Kolaborasi</span>
+        </div>
+        <h2 class="section-title">
+          Mari Bangun Ruang &amp; <span class="gradient-text">Solusi Digital</span> Anda
+        </h2>
+        <p class="section-subtitle">
+          Apakah Anda membutuhkan perancangan arsitektur hunian eksklusif, fasad parametrik, aplikasi web 3D, atau konsultasi teknologi spasial? Saya siap membantu.
+        </p>
+
+        <div class="contact-grid">
+          <!-- Contact Info Channels -->
+          <div class="contact-info-panel">
+            <h3 style="font-size:1.35rem;margin-bottom:1.5rem;">Saluran Komunikasi Langsung</h3>
+
+            <a href="https://wa.me/6281234567890?text=Halo%20Irvan,%20saya%20tertarik%20berkolaborasi%20untuk%20proyek%20arsitektur%20/%20teknologi." target="_blank" rel="noopener noreferrer" class="contact-channel-card" id="contact-whatsapp">
+              <div class="channel-icon amber">
+                <i data-lucide="message-square"></i>
+              </div>
+              <div class="channel-details">
+                <h4>WhatsApp Direct</h4>
+                <p>+62 812-3456-7890 (Respon Cepat)</p>
+              </div>
+            </a>
+
+            <a href="mailto:irvan.archtech@gmail.com" class="contact-channel-card" id="contact-email">
+              <div class="channel-icon">
+                <i data-lucide="mail"></i>
+              </div>
+              <div class="channel-details">
+                <h4>Email Korespondensi</h4>
+                <p>irvan.archtech@gmail.com</p>
+              </div>
+            </a>
+
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-channel-card" id="contact-github">
+              <div class="channel-icon">
+                <i data-lucide="github"></i>
+              </div>
+              <div class="channel-details">
+                <h4>GitHub Repositories</h4>
+                <p>github.com/irvan-archtech</p>
+              </div>
+            </a>
+
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-channel-card" id="contact-linkedin">
+              <div class="channel-icon">
+                <i data-lucide="linkedin"></i>
+              </div>
+              <div class="channel-details">
+                <h4>LinkedIn Professional</h4>
+                <p>linkedin.com/in/irvan-computational</p>
+              </div>
+            </a>
+
+            <div style="margin-top:1.5rem;padding:1.25rem;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:var(--radius-md);">
+              <h5 style="font-size:0.9rem;margin-bottom:0.4rem;color:var(--text-main);"><i data-lucide="map-pin" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;color:var(--accent-amber);"></i> Berbasis di Indonesia</h5>
+              <p style="font-size:0.85rem;color:var(--text-muted);">Tersedia untuk proyek fisik di seluruh Indonesia &amp; proyek remote global software / 3D consulting.</p>
+            </div>
+          </div>
+
+          <!-- Interactive Estimator & Message Form -->
+          <form class="estimator-form" id="collaboration-form">
+            <h3 style="font-size:1.35rem;margin-bottom:1.25rem;">Formulir Pertanyaan &amp; Brief Proyek</h3>
+
+            <!-- Scope Choice -->
+            <div class="form-group">
+              <label class="form-label">Tipe Kolaborasi yang Diinginkan:</label>
+              <div class="project-type-grid">
+                <div class="type-option">
+                  <input type="radio" id="type-arch" name="projectType" value="Desain Arsitektur / Villa" checked>
+                  <label for="type-arch" class="type-label">
+                    <i data-lucide="home" style="width:16px;height:16px"></i>
+                    <span>Arsitektur / Villa</span>
+                  </label>
+                </div>
+                <div class="type-option">
+                  <input type="radio" id="type-facade" name="projectType" value="Fasad Parametrik & Komputasi">
+                  <label for="type-facade" class="type-label">
+                    <i data-lucide="layers" style="width:16px;height:16px"></i>
+                    <span>Fasad Parametrik</span>
+                  </label>
+                </div>
+                <div class="type-option">
+                  <input type="radio" id="type-web3d" name="projectType" value="Aplikasi Web 3D / BIM SaaS">
+                  <label for="type-web3d" class="type-label">
+                    <i data-lucide="globe" style="width:16px;height:16px"></i>
+                    <span>Web 3D / BIM Tool</span>
+                  </label>
+                </div>
+                <div class="type-option">
+                  <input type="radio" id="type-consult" name="projectType" value="Konsultasi Spasial-Tech">
+                  <label for="type-consult" class="type-label">
+                    <i data-lucide="terminal" style="width:16px;height:16px"></i>
+                    <span>Konsultasi Tech</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-name" class="form-label">Nama Anda / Perusahaan:</label>
+              <input type="text" id="contact-name" class="form-control" placeholder="Contoh: Irfan Pratama / PT Artha Megah" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-input-email" class="form-label">Alamat Email / Nomor Kontak:</label>
+              <input type="text" id="contact-input-email" class="form-control" placeholder="nama@email.com atau 08123456789" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" class="form-label">Ceritakan Singkat Rencana Proyek Anda:</label>
+              <textarea id="contact-message" class="form-control" placeholder="Jelaskan lokasi proyek, perkiraan luas/skala, timeline, atau kebutuhan aplikasi yang ingin dibangun..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;" id="submit-inquiry-btn">
+              <i data-lucide="send" style="width:16px;height:16px"></i>
+              <span>Kirim Pesan &amp; Diskusi Langsung</span>
+            </button>
+            <div id="form-feedback" style="display:none;margin-top:1rem;font-size:0.85rem;text-align:center;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="logo">
+          <div class="logo-icon">I</div>
+          <div>
+            <span>IRVAN</span>
+            <span class="logo-badge">ARCH × DEV</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:2rem;flex-wrap:wrap;">
+          <a href="#home" class="nav-link">Beranda</a>
+          <a href="#philosophy" class="nav-link">Filosofi</a>
+          <a href="#projects" class="nav-link">Proyek</a>
+          <a href="#playground" class="nav-link">Parametric Lab</a>
+          <a href="#skills" class="nav-link">Keahlian</a>
+          <a href="#contact" class="nav-link">Kontak</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Irvan. Hak Cipta Dilindungi. Menggabungkan Desain Arsitektur &amp; Software Engineering.
+        </div>
+        <div class="font-mono text-dim">
+          Built with Vanilla CSS • WebGL • Precision Geometry
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       FLOATING FAST HUD ACTIONS (SOUND SYNTH & BLUEPRINT RULER)
+       ===================================================================== -->
+  <div class="floating-hud">
+    <button class="hud-fab" id="fab-blueprint" title="Toggle Blueprint Drafting Grid">
+      <i data-lucide="ruler" style="width:18px;height:18px"></i>
+    </button>
+    <button class="hud-fab" id="fab-audio" title="Toggle Ambient Audio Synth">
+      <i data-lucide="volume-2" id="audio-icon" style="width:18px;height:18px"></i>
+    </button>
+    <button class="hud-fab" id="fab-terminal" title="Buka Interactive Terminal CLI">
+      <i data-lucide="terminal" style="width:18px;height:18px"></i>
+    </button>
+  </div>
+
+  <!-- =====================================================================
+       INTERACTIVE TERMINAL HUD MODAL
+       ===================================================================== -->
+  <div class="terminal-modal-overlay" id="terminal-modal" role="dialog" aria-modal="true" aria-label="Terminal CLI">
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <div class="canvas-dots">
+          <span class="dot-red" id="term-close-dot" style="cursor:pointer"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <div>irvan@arch-terminal: ~ (Type 'help' for commands)</div>
+        <button id="close-terminal-btn" style="background:none;border:none;color:var(--text-dim);cursor:pointer;">
+          <i data-lucide="x" style="width:16px;height:16px"></i>
+        </button>
+      </div>
+      <div class="terminal-content" id="terminal-content">
+        <div class="terminal-output" id="terminal-output">
+          <div><strong style="color:var(--accent-amber)">IRVAN COMPUTATIONAL SYSTEM CLI v2.4</strong></div>
+          <div>Selamat datang di command-line interface. Tersedia perintah cepat untuk menavigasi profil saya.</div>
+          <div>Ketik <strong style="color:var(--accent-cyan)">help</strong> untuk melihat daftar perintah.</div>
+          <br>
+        </div>
+        <div class="terminal-input-row">
+          <span class="terminal-prompt">irvan@system:~$</span>
+          <input type="text" class="terminal-input" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       PROJECT CASE STUDY MODAL
+       ===================================================================== -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-label="Studi Kasus Proyek">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close" aria-label="Tutup Detail Proyek">
+        <i data-lucide="x" style="width:18px;height:18px"></i>
+      </button>
+
+      <img src="assets/images/arch_pavilion.jpg" alt="Project Hero" class="modal-hero-img" id="modal-img">
+
+      <div class="modal-body">
+        <div class="modal-header-meta">
+          <span class="section-tag" id="modal-badge">ARSITEKTUR &amp; PARAMETRIK</span>
+          <span class="font-mono text-dim" id="modal-meta">JAKARTA • 2025</span>
+        </div>
+
+        <h2 class="modal-title" id="modal-title">Paviliun Parametrik Nusantara</h2>
+
+        <div class="modal-grid-stats" id="modal-stats">
+          <div class="modal-stat-box">
+            <h5>SKALA / LUAS</h5>
+            <p id="stat-scale">450 m²</p>
+          </div>
+          <div class="modal-stat-box">
+            <h5>EFISIENSI STRUKTUR</h5>
+            <p id="stat-efficiency">-32% Emisi Kayu</p>
+          </div>
+          <div class="modal-stat-box">
+            <h5>ALAT KOMPUTASI</h5>
+            <p id="stat-tech">Rhino + Kangaroo</p>
+          </div>
+        </div>
+
+        <h4 class="modal-section-title">Tantangan &amp; Latar Belakang</h4>
+        <p class="modal-text" id="modal-challenge">
+          Merancang struktur kanopi terbuka dengan bentang lebar tanpa tiang tengah yang mengganggu interaksi publik, sekaligus tahan terhadap terpaan angin tropis kencang dan gempa bumi.
+        </p>
+
+        <h4 class="modal-section-title">Solusi Arsitektural &amp; Algoritma</h4>
+        <p class="modal-text" id="modal-solution">
+          Memanfaatkan algoritma relaksasi fisik (Kangaroo Physics) untuk merancang permukaan minimal melengkung ganda (double-curved anticlastic surface). Setiap bilah kayu laminasi dipotong dengan kode CNC presisi langsung dari script Grasshopper.
+        </p>
+
+        <h4 class="modal-section-title">Teknologi &amp; Spesifikasi Detail</h4>
+        <div class="project-tags" id="modal-tags" style="margin-top:0.75rem;">
+          <span class="tech-tag">Rhino 3D</span>
+          <span class="tech-tag">Grasshopper</span>
+          <span class="tech-tag">Python Kangaroo</span>
+          <span class="tech-tag">Glulam Teak</span>
+        </div>
+
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#contact" class="btn btn-primary" id="modal-discuss-btn">
+            <i data-lucide="message-square" style="width:16px;height:16px"></i>
+            <span>Diskusikan Proyek Serupa</span>
+          </a>
+          <button class="btn btn-secondary" id="modal-close-secondary">Tutup Jendela</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript App -->
+  <script src="app.js"></script>
+</body>
+</html>
